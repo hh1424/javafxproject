@@ -20,13 +20,16 @@ public class App extends Application {
 
     @Override
     public void start(Stage stage) throws IOException {     
+        //Instantiate a VBox root node
+        VBox root = new VBox();
+        
         //Instantiate a stackPane root node
-        StackPane root = new StackPane();
+        // StackPane root = new StackPane();
 
         //Add both AnimalPane and IndividualPane to the stackPane root node
-        root.getChildren().addAll(new AnimalPane(new Animal()), new IndividualPane(new Individual()));
-        // root.getChildren().addAll(new AnimalPane(new Animal()));
-        // root.getChildren().addAll(new IndividualPane(new Individual()));
+        // root.getChildren().addAll(new AnimalPane(new Animal()), new IndividualPane(new Individual()));
+        root.getChildren().add(new AnimalPane(new Animal()));
+        // root.getChildren().add(new IndividualPane(new Individual()));
         scene = new Scene(root, 900, 700);
         stage.setScene(scene);
         stage.show();
