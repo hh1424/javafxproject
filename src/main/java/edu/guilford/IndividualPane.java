@@ -7,10 +7,11 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.Pane;
 import javafx.scene.shape.Circle;
 
 // IndividualPane is a class that extends one of the Pane classes
-public class IndividualPane extends GridPane {
+public class IndividualPane extends Pane {
     //Could have GridPane, TitlePane, StckPane, Pane, BorderPane, and others
     //These organize the components we want to display in different ways
 
@@ -78,15 +79,17 @@ public class IndividualPane extends GridPane {
         phoneLabel = new Label("Phone: " + individual.getPhone());
 
         //Add labels to the pane
-        this.add(nameLabel, 0, 0);
-        this.add(emailLabel, 0, 1);
-        this.add(phoneLabel, 0, 2);
+        nameLabel.relocate(10, 10);
+        emailLabel.relocate(10, 40);
+        phoneLabel.relocate(10, 70);
+
         // Add textFields to the pane next the to the labels
-        this.add(nameField, 1, 0);
-        this.add(emailField, 1, 1);
-        this.add(phoneField, 1, 2);
+        nameField.relocate(130, 10);
+        emailField.relocate(130, 40);
+        phoneField.relocate(130, 70);
+
         // Add the submit button to the pane
-        this.add(submitButton, 0, 3);
+        submitButton.relocate(10, 160);
 
         //Change the size of the imageView
         imageView.setFitWidth(600);
@@ -96,10 +99,10 @@ public class IndividualPane extends GridPane {
         // imageView.setRotate(45);
 
         //Step 3: Add the Circle to the pane below the submit button
-        this.add(circle, 1, 6);
+        circle.relocate(10, 200);
 
         //Step 3: Add the ImageView to the pane to the right of the textFields
-        this.add(imageView, 2, 0, 1, 4);
+        imageView.relocate(300, 10);
 
         //Give the pane a border
         this.setStyle("-fx-border-color: black");
