@@ -22,9 +22,11 @@ public class App extends Application {
     public void start(Stage stage) throws IOException {     
         //Instantiate a stackPane root node
         StackPane root = new StackPane();
-        
+
         //Add both AnimalPane and IndividualPane to the stackPane root node
         root.getChildren().addAll(new AnimalPane(new Animal()), new IndividualPane(new Individual()));
+        // root.getChildren().addAll(new AnimalPane(new Animal()));
+        // root.getChildren().addAll(new IndividualPane(new Individual()));
         scene = new Scene(root, 900, 700);
         stage.setScene(scene);
         stage.show();

@@ -123,5 +123,9 @@ public class IndividualPane extends Pane {
             individual.setPhone(phoneField.getText());
             System.out.println(e.toString());
         });
+
+        //Add all the components to the pane
+        getChildren().addAll(nameLabel, emailLabel, phoneLabel, nameField, 
+        emailField, phoneField, submitButton, imageView, circle);
     }
 }

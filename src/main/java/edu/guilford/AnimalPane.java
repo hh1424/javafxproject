@@ -34,10 +34,10 @@ public class AnimalPane extends Pane {
     private Label ageLabel;
     private Label soundLabel;
 
-    //Add a submit button attribute
+    //Step 1: Add a submit button attribute
     private Button submitButton;
 
-    //Add a changeImage button attribute
+    //Step 1: Add a changeImage button attribute
     private Button changeImageButton;
 
     //Declare an ImageView for each of the five images
@@ -47,10 +47,10 @@ public class AnimalPane extends Pane {
     private ImageView imageView4;
     private ImageView imageView5;
 
-    //Declare a slider attribute
+    //Step 1: Declare a slider attribute
     private Slider slider;
     
-    //Declare Shape objects
+    //Step 1: Declare Shape objects
     private Polygon hexagon;
     private Circle circle;
     private Polygon triangle;
@@ -61,7 +61,7 @@ public class AnimalPane extends Pane {
         //Set the Animal attribute
         this.animal = animal;
 
-        //Get the path of the file that contains the image
+        //Step 2: Get the path of the file that contains the image
         File baby = new File(this.getClass().getResource("BabyAnimal.jpg").getPath());
         File penguin = new File(this.getClass().getResource("Penguin.jpg").getPath());
         File polarBear = new File(this.getClass().getResource("PolarBear.jpg").getPath());
@@ -89,7 +89,7 @@ public class AnimalPane extends Pane {
         ageLabel = new Label("Age: " + animal.getAge() + " years");
         soundLabel = new Label("Sound: " + animal.getSound());
 
-        //Instantiate the shapes
+        //Step 2: Instantiate the shapes
         circle = new Circle(50, 50, 75);
         circle.setStyle("-fx-fill: red");
         hexagon = new Polygon(75, 75, 175, 75, 225, 150, 175, 225, 75, 225, 25, 150);
@@ -105,6 +105,7 @@ public class AnimalPane extends Pane {
         imageView3.setFitWidth(500);
         imageView4.setFitWidth(500);
         imageView5.setFitWidth(500);
+
         //Preserve the aspect ratio of each imageView
         imageView.setPreserveRatio(true);
         imageView2.setPreserveRatio(true);
@@ -126,7 +127,7 @@ public class AnimalPane extends Pane {
         ageField.relocate(130, 100);
         soundField.relocate(130, 130);
 
-        //Set the location of the ImageViews
+        //Step 3: Set the location of the ImageViews
         imageView.relocate(10, 200);
         imageView2.relocate(10, 200);
         imageView3.relocate(10, 200);
@@ -142,7 +143,7 @@ public class AnimalPane extends Pane {
         //Set the location of the slider
         slider.relocate(660, 350);
 
-        //Set the location of the shapes
+        //Step 3: Set the location of the shapes
         circle.relocate(675, 150);
         hexagon.relocate(675, 150);
         triangle.relocate(675, 150);
@@ -243,7 +244,7 @@ public class AnimalPane extends Pane {
             }
         });
 
-        //Add the labels, textfields, and submit button to the pane
+        //Step 4: Add the items to the pane
         getChildren().addAll(nameLabel, speciesLabel, colorLabel, ageLabel, 
             soundLabel, nameField, speciesField, colorField, ageField, soundField, 
             submitButton, changeImageButton, imageView, slider, circle);
