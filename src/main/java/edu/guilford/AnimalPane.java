@@ -55,6 +55,7 @@ public class AnimalPane extends Pane {
     private Polygon triangle;
     private Rectangle rectangle;
 
+    private int n;
     private boolean valid; //Boolean to check if the input is valid
     private Label errorLabel; //Label to display an error message
     private Label stackTraceLabel; //Label to display the stack trace
@@ -92,8 +93,8 @@ public class AnimalPane extends Pane {
         ageLabel = new Label("Age: " + animal.getAge() + " years");
         soundLabel = new Label("Sound: " + animal.getSound());
 
-        errorLabel = new Label("");
-        stackTraceLabel = new Label("");
+        errorLabel = new Label();
+        stackTraceLabel = new Label();
 
         //Step 2: Instantiate the shapes
         circle = new Circle(50, 50, 75);
@@ -148,9 +149,11 @@ public class AnimalPane extends Pane {
         //Instantiate the slider
         slider = new Slider(1, 4, 0);
         slider.setShowTickMarks(true);
-        slider.setMajorTickUnit(1f);
+        slider.setMajorTickUnit(1);
         slider.setShowTickLabels(true);
-        slider.setBlockIncrement(1f);
+        slider.setBlockIncrement(1);
+        //have the slider move by 1 tick mark each slide
+        slider.setSnapToTicks(true);
         //Set the location of the slider
         slider.relocate(660, 350);
 
@@ -255,32 +258,38 @@ public class AnimalPane extends Pane {
             }
         });
 
+        valid = false;
+        do {
+        try{
+            n = animal.getAge();
+            if (n == 0) {
+                throw new BadNumberException("Bad Number. Age cannot be " + n);
+            }
+            valid = true;
+            } catch (NumberFormatException ex) {
+            //put the stack trace in the stackTraceLabel
+            stackTraceLabel.setText(ex.getMessage());
+            //Display the error message in the label
+            errorLabel.setText("Input for age is not an integer " + n);
+            //flush the errorLabel so that it erases the previous message
+            System.err.flush();
+            } catch (BadNumberException ex) {
+            //Display the stack trace in the stackTraceLabel
+            stackTraceLabel.setText(ex.getMessage());
+            System.exit(1);
+        } 
+        } while (!valid);
+
         //Step 4: Add the items to the pane
         getChildren().addAll(nameLabel, speciesLabel, colorLabel, ageLabel, 
             soundLabel, nameField, speciesField, colorField, ageField, soundField, 
             submitButton, changeImageButton, imageView, slider, circle, errorLabel, stackTraceLabel);
-    } 
+        } 
 
-    {
-        try{
-            animal.setAge(Integer.parseInt(ageField.getText()));
-            if (animal.getAge() == 0) {
-                throw new BadNumberException("Bad Number " + animal.getAge() + "Age cannot be 0");
-            }
-            valid = true;
-        } catch (NumberFormatException ex) {
-            //Display the error message in the label
-            errorLabel.setText("Input for age is not an integer " + animal.getAge());
-        } catch (BadNumberException ex) {
-            //Display the stack trace in the stackTraceLabel
-            stackTraceLabel.setText(ex.getMessage());
-            System.exit(1);
-        } while (!valid);
-    }
 
-    private static class BadNumberException extends Exception {
-        public BadNumberException(String message) {
-            super(message);
+        private static class BadNumberException extends Exception {
+            public BadNumberException(String message) {
+                super(message);
         }
     }
 }
