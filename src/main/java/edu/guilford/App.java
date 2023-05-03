@@ -30,7 +30,7 @@ public class App extends Application {
         // root.getChildren().addAll(new AnimalPane(new Animal()), new IndividualPane(new Individual()));
         root.getChildren().add(new AnimalPane(new Animal()));
         // root.getChildren().add(new IndividualPane(new Individual()));
-        scene = new Scene(root, 900, 700);
+        scene = new Scene(root, 900, 650);
         stage.setScene(scene);
         stage.show();
     }

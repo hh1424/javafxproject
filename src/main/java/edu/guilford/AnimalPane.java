@@ -10,10 +10,9 @@ import javafx.scene.control.Slider;
 import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
-import javafx.scene.shape.Rectangle;
-import javafx.scene.shape.Shape;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.Polygon;
+import javafx.scene.shape.Rectangle;
 
 // AnimalPane is a Pane that extends one of the Pane classes from JavaFX.
 public class AnimalPane extends Pane {
@@ -56,6 +55,10 @@ public class AnimalPane extends Pane {
     private Polygon triangle;
     private Rectangle rectangle;
 
+    private boolean valid; //Boolean to check if the input is valid
+    private Label errorLabel; //Label to display an error message
+    private Label stackTraceLabel; //Label to display the stack trace
+
     //Constructor for the AnimalPane class
     public AnimalPane(Animal animal) {
         //Set the Animal attribute
@@ -88,6 +91,9 @@ public class AnimalPane extends Pane {
         colorLabel = new Label("Color: " + animal.getColor());
         ageLabel = new Label("Age: " + animal.getAge() + " years");
         soundLabel = new Label("Sound: " + animal.getSound());
+
+        errorLabel = new Label("");
+        stackTraceLabel = new Label("");
 
         //Step 2: Instantiate the shapes
         circle = new Circle(50, 50, 75);
@@ -127,6 +133,11 @@ public class AnimalPane extends Pane {
         ageField.relocate(130, 100);
         soundField.relocate(130, 130);
 
+        //Set the location of the error label and stack 
+        //trace label beside the textfields
+        errorLabel.relocate(300, 10);
+        stackTraceLabel.relocate(300, 40);
+
         //Step 3: Set the location of the ImageViews
         imageView.relocate(10, 200);
         imageView2.relocate(10, 200);
@@ -161,7 +172,7 @@ public class AnimalPane extends Pane {
         //Instantiate the changeImage button
         changeImageButton = new Button("Change Image");
         //Set the location of the changeImage button
-        changeImageButton.relocate(10, 650);
+        changeImageButton.relocate(600, 600);
         //Change the color of the button to blue
         changeImageButton.setStyle("-fx-background-color: lightblue");
 
@@ -247,6 +258,30 @@ public class AnimalPane extends Pane {
         //Step 4: Add the items to the pane
         getChildren().addAll(nameLabel, speciesLabel, colorLabel, ageLabel, 
             soundLabel, nameField, speciesField, colorField, ageField, soundField, 
-            submitButton, changeImageButton, imageView, slider, circle);
+            submitButton, changeImageButton, imageView, slider, circle, errorLabel, stackTraceLabel);
+    } 
+
+    {
+        try{
+            animal.setAge(Integer.parseInt(ageField.getText()));
+            if (animal.getAge() == 0) {
+                throw new BadNumberException("Bad Number " + animal.getAge() + "Age cannot be 0");
+            }
+            valid = true;
+        } catch (NumberFormatException ex) {
+            //Display the error message in the label
+            errorLabel.setText("Input for age is not an integer " + animal.getAge());
+        } catch (BadNumberException ex) {
+            //Display the stack trace in the stackTraceLabel
+            stackTraceLabel.setText(ex.getMessage());
+            System.exit(1);
+        } while (!valid);
+    }
+
+    private static class BadNumberException extends Exception {
+        public BadNumberException(String message) {
+            super(message);
+        }
     }
 }
+
