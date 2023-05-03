@@ -32,10 +32,8 @@ public class Animal {
     }
 
     public void setName(String name) {
-        if (name.length() > 0) {
+        if (name != null) {
             this.name = name;
-        } else {
-            System.out.println("Name must be at least one character long.");
         }
     }
 
@@ -44,10 +42,8 @@ public class Animal {
     }
 
     public void setSpecies(String species) {
-        if (species.length() > 0) {
+        if (species != null) {
             this.species = species;
-        } else {
-            System.out.println("Species must be at least one character long.");
         }
     }
 
@@ -56,10 +52,8 @@ public class Animal {
     }
 
     public void setColor(String color) {
-        if (color.length() > 0) {
+        if (color != null) {
             this.color = color;
-        } else {
-            System.out.println("Color must be at least one character long.");
         }
     }
 
@@ -80,10 +74,8 @@ public class Animal {
     }
 
     public void setSound(String sound) {
-        if (sound.length() > 0) {
+        if (sound != null) {
             this.sound = sound;
-        } else {
-            System.out.println("Sound must be at least one character long.");
         }
     }
 
