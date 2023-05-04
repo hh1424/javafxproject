@@ -164,6 +164,8 @@ public class AnimalPane extends Pane {
         slider.setBlockIncrement(1);
         //have the slider move by 1 tick mark each slide
         slider.setSnapToTicks(true);
+        slider.setShowTickMarks(true);
+        slider.setMinorTickCount(0);
         //Set the location of the slider
         slider.relocate(660, 350);
 
